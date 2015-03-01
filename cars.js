@@ -3,8 +3,6 @@ var main = function() {
   $("#search_btn_id").click(function(e) {
     e.preventDefault();
     
-    var apiUrl = "http://www.nhtsa.gov/webapi/api/SafetyRatings"
-    
     var year = $(":input[name=year]").val();
     var make = $(":input[name=make]").val();
     var model = $(":input[name=model]").val();
@@ -25,7 +23,7 @@ var main = function() {
       
       $.ajax({
           type: "GET",
-          url: apiUrl + apiParam + "?format=json",
+          url: "http://www.nhtsa.gov/webapi/api/SafetyRatings" + apiParam + "?format=json",
           dataType: "jsonp",
           success: process
       });
