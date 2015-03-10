@@ -87,10 +87,8 @@ $(document).ready(function() {
     var valid = true;
     if (year === "") {
       valid = false;
-    } else {
-      if (make === "" && model !== "") {
+    } else if (make === "" && model !== "") {
         valid = false;
-      }
     }
 
     if (valid) {
