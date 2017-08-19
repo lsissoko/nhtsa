@@ -76,16 +76,14 @@ $(document).ready(function() {
     // TODO - build one html string to populate #results (see getByYear())
     $('#results').empty();
 
-    $('<tr>').html('<td><strong>year/make/model</strong></td>' +
-      '<td>&nbsp;&nbsp;</td>' +
-      '<td><strong>rating</strong></td>'
+    $('<tr>').html('<td class="col-md-6"><strong>year/make/model</strong></td>' +
+      '<td class="col-md-6"><strong>rating</strong></td>'
     ).appendTo('#results');
 
     $.each(data.Results, function(key, val) {
       $('<tr>').html(
-        '<td>' + val.VehicleDescription + '</td>' +
-        '<td>&nbsp;&nbsp;</td>' +
-        '<td>' + val.OverallRating + '</td>'
+        '<td class="col-md-6">' + val.VehicleDescription + '</td>' +
+        '<td class="col-md-6">' + val.OverallRating + '</td>'
       ).appendTo($('#results'));
     });
   }
