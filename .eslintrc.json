@@ -4,6 +4,7 @@
     "jquery": true
   },
   "globals": {
+    "Lazy": true
   },
   "rules": {
     "react/jsx-quotes": 0,

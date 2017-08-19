@@ -40,3 +40,6 @@ table {
   content:"|";
   margin:0 3px 0 7px;
 }
+.centered {
+  text-align: center;
+}

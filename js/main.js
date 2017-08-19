@@ -5,12 +5,9 @@ $(document).ready(function() {
   };
   /* eslint-enable */
 
-  function years(data) {
-    var results = data.Results;
-
-    results.sort(function(a, b) {
-      return a.Make === b.Make;
-    });
+  function getByYear(data) {
+    var sortFn = function(item) { return item.Make; };
+    var results = Lazy(data.Results).sortBy(sortFn).toArray(); // eslint-disable-line new-cap
 
     var resultsHtml = '' +
       '<div class="row">' +
@@ -21,8 +18,8 @@ $(document).ready(function() {
         return '' +
           '<div class="row">' +
           '  <tr>' +
-          '    <td class="col col-md-6">' + item.ModelYear + '</td>' +
-          '    <td class="col col-md-6">' + item.Make + '</td>' +
+          '    <td class="col-md-6">' + item.ModelYear + '</td>' +
+          '    <td class="col-md-6">' + item.Make + '</td>' +
           '  </tr>' +
           '</div>';
       }).join('');
@@ -33,23 +30,31 @@ $(document).ready(function() {
 
 
   function getByYearMake(data) {
+    var sortFn = function(item) { return item.Make && item.Model; };
+    var results = Lazy(data.Results).sortBy(sortFn).toArray(); // eslint-disable-line new-cap
+
+    // TODO - build one html string to populate #results (see getByYear())
     $('#results').empty();
 
     $('<tr>')
-      .html('<td><strong>year</strong></td><td><strong>make</strong></td><td><strong>model</strong></td>')
+      .html('<td class="col-md-4"><strong>year</strong></td><td class="col-md-4"><strong>make</strong></td><td class="col-md-4"><strong>model</strong></td>')
       .appendTo('#results');
 
-    $.each(data.Results, function(key, val) {
+    $.each(results, function(key, val) {
       $('<tr>').html(
-        '<td>' + val.ModelYear + '</td>' +
-        '<td>' + val.Make + '</td>' +
-        '<td>' + val.Model + '</td>'
+        '<td class="col-md-4">' + val.ModelYear + '</td>' +
+        '<td class="col-md-4">' + val.Make + '</td>' +
+        '<td class="col-md-4">' + val.Model + '</td>'
       ).appendTo($('#results'));
     });
   }
 
 
   function getByYearMakeModel(data) {
+    var sortFn = function(item) { return item.VehicleDescription; };
+    var results = Lazy(data.Results).sortBy(sortFn).toArray(); // eslint-disable-line new-cap
+
+    // TODO - build one html string to populate #results (see getByYear())
     $('#results').empty();
 
     $('<tr>').html('<td><strong>id</strong></td>' +
@@ -57,7 +62,7 @@ $(document).ready(function() {
       '<td><strong>year/make/model</strong></td>'
     ).appendTo('#results');
 
-    $.each(data.Results, function(key, val) {
+    $.each(results, function(key, val) {
       $('<tr id="' + val.VehicleId + '">').html(
         '<td>' + val.VehicleId + '</td>' +
         '<td>&nbsp;&nbsp;</td>' +
@@ -68,6 +73,7 @@ $(document).ready(function() {
 
 
   function rating(data) {
+    // TODO - build one html string to populate #results (see getByYear())
     $('#results').empty();
 
     $('<tr>').html('<td><strong>year/make/model</strong></td>' +
@@ -106,7 +112,7 @@ $(document).ready(function() {
     if (valid) {
       $('#search-btn-id').removeClass('disabled');
 
-      var successFunction = years;
+      var successFunction = getByYear;
       var apiParam = '/modelyear/' + year;
       if (make !== '') {
         apiParam += '/make/' + make;
@@ -117,6 +123,8 @@ $(document).ready(function() {
         successFunction = getByYearMakeModel;
       }
 
+      // TODO - implement cache
+      // TODO - check cache before calling API
       $.ajax({
         type: 'GET',
         url: 'http://www.nhtsa.gov/webapi/api/SafetyRatings' + apiParam + '?format=json',
@@ -141,7 +149,6 @@ $(document).ready(function() {
 
       // TODO - implement cache
       // TODO - check cache before calling API
-
       $.ajax({
         type: 'GET',
         url: 'http://www.nhtsa.gov/webapi/api/SafetyRatings/vehicleID/' + vehicleId + '?format=json',
