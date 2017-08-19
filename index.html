@@ -1,10 +1,13 @@
 <html>
+
 <head>
   <meta charset="UTF-8">
   <title>NHTSA 5-Star Safety Ratings</title>
   <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet'>
-  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/main.css">
 </head>
+
 <body>
   <div class="wrapper">
     <br>
@@ -16,16 +19,24 @@
         <td><strong>Step 1: Find your vehicle id</strong></td>
       </tr>
       <tr>
-        <td><input type="text" name="year" value="" required placeholder="Enter a valid year"></td>
+        <td>
+          <input type="text" name="year" value="" required placeholder="Enter a valid year">
+        </td>
       </tr>
       <tr>
-        <td><input type="text" name="make" value="" required placeholder="Enter a valid make"></td>
+        <td>
+          <input type="text" name="make" value="" required placeholder="Enter a valid make">
+        </td>
       </tr>
       <tr>
-        <td><input type="text" name="model" value="" required placeholder="Enter a valid model"></td>
+        <td>
+          <input type="text" name="model" value="" required placeholder="Enter a valid model">
+        </td>
       </tr>
       <tr>
-        <td><input class="disabled" id="search_btn_id" type="Button" name="search" value="search"></td>
+        <td>
+          <input class="disabled" id="search-btn-id" type="Button" name="search" value="search">
+        </td>
       </tr>
       <tr>
         <td>&nbsp;</td>
@@ -34,18 +45,25 @@
         <td><strong>Step 2: Find your vehicle rating</strong></td>
       </tr>
       <tr>
-        <td><input type="text" name="vehicle_id" value="" placeholder="Enter a valid vehicle ID"></td>
+        <td>
+          <input type="text" name="vehicle-id" value="" placeholder="Enter a valid vehicle ID">
+        </td>
       </tr>
       <tr>
-        <td><input class="disabled" id="search_btn_rating" type="Button" name="search_2" value="search"></td>
+        <td>
+          <input class="disabled" id="search-btn-rating" type="Button" name="search-2" value="search">
+        </td>
       </tr>
     </table>
     <br/>
     <br/>
     <table id="results">
+      <div class="container">
+        <div class="row">
+        </div>
+      </div>
     </table>
   </div>
-
   <div class="footer">
     <hr>
     <br/>
@@ -57,7 +75,9 @@
     </ul>
     <!-- scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="cars.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
   </div>
 </body>
+
 </html>
