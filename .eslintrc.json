@@ -1,0 +1,27 @@
+{
+  "extends": "eslint-config-airbnb-es5",
+  "env": {
+    "jquery": true
+  },
+  "globals": {
+    "Lazy": true
+  },
+  "rules": {
+    "react/jsx-quotes": 0,
+    "jsx-quotes": [2, "prefer-double"],
+
+    "func-names": 0,
+
+    "no-empty-label": 0,
+
+    "keyword-spacing": 0,
+    "space-after-keywords": 0,
+    "space-return-throw-case": 0,
+
+    "radix": [2, "as-needed"],
+
+    "no-loop-func": 1,
+
+    "indent": [2, 2, {"SwitchCase": 1}]
+  }
+}
