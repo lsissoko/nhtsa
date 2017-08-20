@@ -6,15 +6,15 @@ $(document).ready(function() {
   /* eslint-enable */
 
   function getByYear(data) {
-    var sortFn = function(item) { return item.Make; };
-    var results = Lazy(data.Results).sortBy(sortFn).toArray(); // eslint-disable-line new-cap
-
-    var resultsHtml = '' +
+    // TODO - add pagination
+    $('#results').html(
       '<div class="row">' +
       '  <td class="col-md-6"><strong>year</strong></td>' +
       '  <td class="col-md-6"><strong>make</strong></td>' +
       '</div>' +
-      results.map(function(item) {
+      Lazy(data.Results) // eslint-disable-line new-cap
+      .sortBy(function(item) { return item.Make; })
+      .map(function(item) {
         return '' +
           '<div class="row">' +
           '  <tr>' +
@@ -22,70 +22,74 @@ $(document).ready(function() {
           '    <td class="col-md-6">' + item.Make + '</td>' +
           '  </tr>' +
           '</div>';
-      }).join('');
-
-    // TODO - add pagination
-    $('#results').html(resultsHtml);
+      }).join('')
+    );
   }
 
 
   function getByYearMake(data) {
-    var sortFn = function(item) { return item.Make && item.Model; };
-    var results = Lazy(data.Results).sortBy(sortFn).toArray(); // eslint-disable-line new-cap
-
-    // TODO - build one html string to populate #results (see getByYear())
-    $('#results').empty();
-
-    $('<tr>')
-      .html('<td class="col-md-4"><strong>year</strong></td><td class="col-md-4"><strong>make</strong></td><td class="col-md-4"><strong>model</strong></td>')
-      .appendTo('#results');
-
-    $.each(results, function(key, val) {
-      $('<tr>').html(
-        '<td class="col-md-4">' + val.ModelYear + '</td>' +
-        '<td class="col-md-4">' + val.Make + '</td>' +
-        '<td class="col-md-4">' + val.Model + '</td>'
-      ).appendTo($('#results'));
-    });
+    // TODO - add pagination
+    $('#results').html(
+      '<div class="row">' +
+      '  <td class="col-md-4"><strong>year</strong></td>' +
+      '  <td class="col-md-4"><strong>make</strong></td>' +
+      '  <td class="col-md-4"><strong>model</strong></td>' +
+      '</div>' +
+      Lazy(data.Results) // eslint-disable-line new-cap
+      .sortBy(function(item) { return item.Make && item.Model; })
+      .map(function(item) {
+        return '' +
+          '<div class="row">' +
+          '  <tr>' +
+          '    <td class="col-md-4">' + item.ModelYear + '</td>' +
+          '    <td class="col-md-4">' + item.Make + '</td>' +
+          '    <td class="col-md-4">' + item.Model + '</td>' +
+          '  </tr>' +
+          '</div>';
+      }).join('')
+    );
   }
 
 
   function getByYearMakeModel(data) {
-    var sortFn = function(item) { return item.VehicleDescription; };
-    var results = Lazy(data.Results).sortBy(sortFn).toArray(); // eslint-disable-line new-cap
-
-    // TODO - build one html string to populate #results (see getByYear())
-    $('#results').empty();
-
-    $('<tr>').html('<td><strong>id</strong></td>' +
-      '<td>&nbsp;&nbsp;</td>' +
-      '<td><strong>year/make/model</strong></td>'
-    ).appendTo('#results');
-
-    $.each(results, function(key, val) {
-      $('<tr id="' + val.VehicleId + '">').html(
-        '<td>' + val.VehicleId + '</td>' +
-        '<td>&nbsp;&nbsp;</td>' +
-        '<td>' + val.VehicleDescription + '</td>'
-      ).appendTo($('#results'));
-    });
+    // TODO - add pagination
+    $('#results').html(
+      '<div class="row">' +
+      '  <td class="col-md-3"><strong>id</strong></td>' +
+      '  <td class="col-md-9"><strong>year/make/model</strong></td>' +
+      '</div>' +
+      Lazy(data.Results) // eslint-disable-line new-cap
+      .sortBy(function(item) { return item.Make; })
+      .map(function(item) {
+        return '' +
+          '<div class="row">' +
+          '  <tr id="' + item.VehicleId + '">' +
+          '    <td class="col-md-3">' + item.VehicleId + '</td>' +
+          '    <td class="col-md-9">' + item.VehicleDescription + '</td>' +
+          '  </tr>' +
+          '</div>';
+      }).join('')
+    );
   }
 
 
   function rating(data) {
-    // TODO - build one html string to populate #results (see getByYear())
-    $('#results').empty();
-
-    $('<tr>').html('<td class="col-md-6"><strong>year/make/model</strong></td>' +
-      '<td class="col-md-6"><strong>rating</strong></td>'
-    ).appendTo('#results');
-
-    $.each(data.Results, function(key, val) {
-      $('<tr>').html(
-        '<td class="col-md-6">' + val.VehicleDescription + '</td>' +
-        '<td class="col-md-6">' + val.OverallRating + '</td>'
-      ).appendTo($('#results'));
-    });
+    $('#results').html(
+      '<div class="row">' +
+      '  <td class="col-md-8"><strong>year/make/model</strong></td>' +
+      '  <td class="col-md-4"><strong>rating</strong></td>' +
+      '</div>' +
+      Lazy(data.Results) // eslint-disable-line new-cap
+      .map(function(item) {
+        return '' +
+          '<div class="row">' +
+          '  <tr>' +
+          '    <td class="col-md-8">' + item.VehicleDescription + '</td>' +
+          '    <td class="col-md-4">' + item.OverallRating + '</td>' +
+          '  </tr>' +
+          '</div>';
+      }).join('')
+    );
   }
 
 
